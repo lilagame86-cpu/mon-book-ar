@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Book AR – Modèle 3D animé</title>
+
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+
+  <!-- MindAR -->
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.4/dist/mindar-image-aframe.prod.js"></script>
+
+  <!-- Animation Mixer (APRÈS A-FRAME & MindAR) -->
+  <script src="https://cdn.jsdelivr.net/npm/aframe-animation-mixer@5.0.0/dist/aframe-animation-mixer.min.js"></script>
+
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
+</head>
+
+<body>
+  <a-scene
+    mindar-image="imageTargetSrc: targets.mind;"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: true"
+    renderer="colorManagement: true; physicallyCorrectLights: true">
+
+    <!-- Lumières -->
+    <a-light type="ambient" intensity="1.2"></a-light>
+    <a-light type="directional" position="1 2 1" intensity="0.8"></a-light>
+
+    <!-- Assets -->
+    <a-assets>
+      <a-asset-item id="model3d" src="model.glb"></a-asset-item>
+    </a-assets>
+
+    <!-- Caméra -->
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- Target AR -->
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-entity
+        id="model"
+        gltf-model="#model3d"
+        animation-mixer="clip: *; loop: repeat; timeScale: 1"
+        position="0 0 0.05"
+        rotation="0 180 0"
+        scale="0.3 0.3 0.3">
+      </a-entity>
+    </a-entity>
+
+  </a-scene>
+</body>
+</html>
