@@ -34,19 +34,19 @@
       <a-asset-item id="model3d" src="model.glb"></a-asset-item>
     </a-assets>
 
-    <!-- Caméra -->
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-    <!-- Target AR -->
-    <a-entity
+<!-- TEST : modèle hors MindAR -->
+<a-entity
   id="model"
   gltf-model="#model3d"
   animation-mixer="clip: *; loop: repeat; timeScale: 1"
-  position="0 0 0.05"
+  position="0 0 -2"
   rotation="0 180 0"
   scale="0.3 0.3 0.3"
   visible="true">
 </a-entity>
+
 
   </a-scene>
 </body>
