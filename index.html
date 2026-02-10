@@ -17,6 +17,25 @@
     body { margin: 0; overflow: hidden; }
   </style>
 </head>
+<script>
+  const modelEl = document.querySelector('#model');
+
+  modelEl.addEventListener('model-loaded', (e) => {
+    const model = e.detail.model;
+    console.log('MODEL LOADED');
+
+    const animations = model.animations;
+    console.log('ANIMATIONS FOUND:', animations);
+
+    if (!animations || animations.length === 0) {
+      console.error('❌ Aucune animation détectée dans le GLB');
+    } else {
+      animations.forEach((clip, i) => {
+        console.log(`Animation ${i}:`, clip.name, clip.duration);
+      });
+    }
+  });
+</script>
 
 <body>
 
