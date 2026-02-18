@@ -12,11 +12,12 @@
   </a-assets>
 
   <a-entity
-    gltf-model="#model3d"
-    animation-mixer="clip: ArmatureAction; loop: repeat"
-    position="0 1.6 -3"
-    scale="1 1 1">
-  </a-entity>
+  gltf-model="#model3d"
+  position="0 1.6 -3"
+  scale="1 1 1"
+  animation="property: rotation; to: 0 360 0; loop: true; dur: 3000; easing: linear">
+</a-entity>
+
 
   <a-camera></a-camera>
 </a-scene>
