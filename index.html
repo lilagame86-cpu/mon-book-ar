@@ -2,13 +2,16 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <title>AR Anim Test</title>
+  <title>AR Test Cube Rotation</title>
 
+  <!-- A-Frame -->
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+
+  <!-- MindAR -->
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.4/dist/mindar-image-aframe.prod.js"></script>
 
   <style>
-    body { margin:0; overflow:hidden; }
+    body { margin: 0; overflow: hidden; }
   </style>
 </head>
 
@@ -18,71 +21,42 @@
   mindar-image="imageTargetSrc: targets.mind;"
   vr-mode-ui="enabled: false"
   device-orientation-permission-ui="enabled: true"
-  renderer="colorManagement: true; physicallyCorrectLights: true">
+  renderer="colorManagement: true; physicallyCorrectLights: true"
+>
 
+  <!-- Lumières -->
   <a-light type="ambient" intensity="1.2"></a-light>
   <a-light type="directional" position="1 2 1" intensity="0.8"></a-light>
 
+  <!-- Assets -->
   <a-assets>
     <a-asset-item id="model3d" src="model.glb"></a-asset-item>
   </a-assets>
 
+  <!-- Caméra -->
   <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-  <a-entity 
-  position="0 1.6 -3"
-  animation="property: rotation; to: 0 360 0; loop: true; dur: 3000; easing: linear">
+  <!-- CIBLE AR -->
+  <a-entity mindar-image-target="targetIndex: 0">
 
-  <a-entity
-    gltf-model="#model3d"
-    scale="1 1 1">
+    <!-- ENTITÉ PARENTE QUI TOURNE -->
+    <a-entity
+      id="rotator"
+      position="0 0 0.1"
+      animation="property: rotation; to: 0 360 0; loop: true; dur: 3000; easing: linear"
+    >
+
+      <!-- MODÈLE 3D -->
+      <a-entity
+        gltf-model="#model3d"
+        scale="0.5 0.5 0.5">
+      </a-entity>
+
+    </a-entity>
+
   </a-entity>
 
-</a-entity>
-
-
 </a-scene>
-
-<script>
-  const modelEl = document.querySelector('#model');
-  const targetEl = document.querySelector('#target');
-
-  let mixer;
-  let clock = new THREE.Clock();
-
-  modelEl.addEventListener('model-loaded', (e) => {
-    const model = e.detail.model;
-    const clips = model.animations;
-
-    if (!clips || clips.length === 0) {
-      console.error("Aucune animation trouvée");
-      return;
-    }
-
-    mixer = new THREE.AnimationMixer(model);
-
-    clips.forEach((clip) => {
-      const action = mixer.clipAction(clip);
-      action.play();
-    });
-
-    console.log("Animations prêtes:", clips.length);
-  });
-
-  targetEl.addEventListener('targetFound', () => {
-    modelEl.setAttribute('visible', 'true');
-  });
-
-  targetEl.addEventListener('targetLost', () => {
-    modelEl.setAttribute('visible', 'false');
-  });
-
-  AFRAME.scenes[0].addEventListener('renderstart', () => {
-    AFRAME.scenes[0].addEventListener('tick', () => {
-      if (mixer) mixer.update(clock.getDelta());
-    });
-  });
-</script>
 
 </body>
 </html>
