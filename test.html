@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aframe-animation-mixer@5.0.0/dist/aframe-animation-mixer.min.js"></script>
+</head>
+<body>
+
+<a-scene>
+  <a-assets>
+    <a-asset-item id="model3d" src="model.glb"></a-asset-item>
+  </a-assets>
+
+  <a-entity
+    gltf-model="#model3d"
+    animation-mixer="clip: *; loop: repeat"
+    position="0 1.6 -3"
+    scale="1 1 1">
+  </a-entity>
+
+  <a-camera></a-camera>
+</a-scene>
+
+</body>
+</html>
