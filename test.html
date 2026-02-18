@@ -8,11 +8,17 @@
 
 <a-scene>
 
-  <a-box 
-    position="0 1.6 -3"
-    color="red"
-    animation="property: rotation; to: 0 360 0; loop: true; dur: 2000">
-  </a-box>
+  <a-entity 
+  position="0 1.6 -3"
+  animation="property: rotation; to: 0 360 0; loop: true; dur: 3000; easing: linear">
+
+  <a-entity
+    gltf-model="#model3d"
+    scale="1 1 1">
+  </a-entity>
+
+</a-entity>
+
 
 </a-scene>
 
